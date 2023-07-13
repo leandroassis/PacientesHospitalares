@@ -10,4 +10,4 @@ Basta executar o projeto rodando o executável `sistema`. Um menu irá guiar o u
         |1| Inserir paciente |
         |2| Buscar um paciente |
         |3| Imprimir os pacientes cadastrados |
-        |Outros| Sai do programa 
+        |Outros| Sai do programa |
