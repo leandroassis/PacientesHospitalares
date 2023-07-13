@@ -22,6 +22,7 @@ int main(int argc, const char* const argv[]){
 
         switch(opcao){
             case 1:
+                system("clear");
                 std::cout << "Insira o nome do paciente: " << std::endl;
                 getline(std::cin, nome);
                 std::cout << "Insira a idade do paciente: " << std::endl;
@@ -42,6 +43,8 @@ int main(int argc, const char* const argv[]){
                 break;
                 
             case 2:
+                system("clear");
+
                 std::cout << "Insira o nome do paciente: " << std::endl;
                 getline(std::cin, nome);
 
@@ -57,6 +60,8 @@ int main(int argc, const char* const argv[]){
                 break;
 
             case 3:
+                system("clear");
+                
                 std::cout << "Lista de pacientes:" << std::endl;
                 sistema.imprime(std::cout);
                 break;
