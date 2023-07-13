@@ -4,32 +4,68 @@
 #include "Sistema.h"
 #include "Paciente.h"
 
-int main() {
+int main(int argc, const char* const argv[]){
     Sistema sistema;
+    string nome;
+    int idade, opcao;
+    const Paciente* paciente;
 
-    try {
-        sistema.insere(PacientePediatrico("João", 5));
-        sistema.insere(PacienteGeriatrico("Maria", 70));
-        sistema.insere(PacientePediatrico("Pedro", 8));
+    while(true){
+        std::cout << "Insira a opção desejada. ";
+        std::cout << "Opções disponíveis:" << std::endl;
+        std::cout << "1 - Inserir paciente" << std::endl;
+        std::cout << "2 - Buscar paciente" << std::endl;
+        std::cout << "3 - Imprimir pacientes" << std::endl;
+        std::cout << "Outros - Sair" << std::endl;
+        std::cin >> opcao;
+        std::cin.ignore();
 
-        const Paciente* paciente = sistema.busca("Maria");
-        if (paciente != nullptr) {
-            std::cout << "Paciente encontrado: " << *paciente << std::endl;
-        } else {
-            std::cout << "Paciente não encontrado" << std::endl;
+        switch(opcao){
+            case 1:
+                std::cout << "Insira o nome do paciente: " << std::endl;
+                getline(std::cin, nome);
+                std::cout << "Insira a idade do paciente: " << std::endl;
+                std::cin >> idade;
+                std::cin.ignore();
+
+                try{
+                    if(idade < 15) sistema.insere(PacientePediatrico(nome, idade));
+                    else if(idade > 60) sistema.insere(PacienteGeriatrico(nome, idade));
+                    else sistema.insere(PacienteClinico(nome, idade));
+                } catch (const std::exception& ex){
+                    std::cout << "Erro: " << ex.what() << std::endl;
+                    std::cout << "O paciente não foi inserido" << std::endl;
+                    break;
+                }
+
+                std::cout << "Paciente inserido com sucesso" << std::endl;
+                break;
+                
+            case 2:
+                std::cout << "Insira o nome do paciente: " << std::endl;
+                getline(std::cin, nome);
+
+                try{
+                    paciente = sistema.busca(nome);
+                } catch (const std::exception& ex){
+                    std::cout << "Erro: " << ex.what() << std::endl;
+                    std::cout << "O paciente não foi encontrado" << std::endl;
+                    break;
+                }
+
+                std::cout << "Paciente encontrado: " << *paciente << std::endl;
+                break;
+
+            case 3:
+                std::cout << "Lista de pacientes:" << std::endl;
+                sistema.imprime(std::cout);
+                break;
+
+            default:
+                std::cout << "Opção inválida" << std::endl;
+                return 1;
+                break;
         }
-
-        paciente = sistema.busca("Ana");
-        if (paciente != nullptr) {
-            std::cout << "Paciente encontrado: " << *paciente << std::endl;
-        } else {
-            std::cout << "Paciente não encontrado" << std::endl;
-        }
-
-        std::cout << "Lista de pacientes:" << std::endl;
-        sistema.imprime(std::cout);
-    } catch (const std::exception& ex) {
-        std::cout << "Erro: " << ex.what() << std::endl;
     }
 
     return 0;

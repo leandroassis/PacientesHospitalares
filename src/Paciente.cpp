@@ -28,6 +28,13 @@ void PacienteGeriatrico::imprime(std::ostream& os) const {
     os << "Nome: " << nome << ", Idade: " << idade << " anos";
 }
 
+// funções de PacienteClinico
+PacienteClinico::PacienteClinico(const std::string& nome, int idade) : Paciente(nome), idade(idade) {}
+
+void PacienteClinico::imprime(std::ostream& os) const {
+    os << "Nome: " << nome << ", Idade: " << idade << " anos";
+}
+
 // operadores sobrecarregados
 std::ostream& operator<<(std::ostream& os, const Paciente& paciente) {
     paciente.imprime(os);

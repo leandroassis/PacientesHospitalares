@@ -6,13 +6,13 @@
 #include <string>
 #include <exception>
 
-template <class T>
-struct Nodo {
-    T paciente;
-    Nodo* esquerda;
-    Nodo* direita;
+template <class T> class Nodo{
+    public:
+        T paciente;
+        Nodo* esquerda;
+        Nodo* direita;
 
-    Nodo(const T& paciente);
+        Nodo(const T& paciente);
 };
 
 class Sistema {
@@ -81,10 +81,10 @@ public:
 
     const Paciente* busca(const std::string& nome) const {
         Nodo<Paciente>* nodo = buscaNodo(raiz, nome);
-        if (nodo != nullptr) {
-            return &(nodo->paciente);
+        if (nodo == nullptr) {
+            throw std::runtime_error("Paciente não existe.");
         }
-        return nullptr;
+        return &(nodo->paciente);
     }
 
     void imprime(std::ostream& os) const {

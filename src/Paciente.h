@@ -27,7 +27,7 @@ class PacientePediatrico : public Paciente {
     public:
         PacientePediatrico(const std::string&, int);
 
-        void imprime(std::ostream&) const override;
+        void imprime(std::ostream&) const;
 };
 
 class PacienteGeriatrico : public Paciente {
@@ -37,7 +37,17 @@ class PacienteGeriatrico : public Paciente {
     public:
         PacienteGeriatrico(const std::string&, int);
 
-        void imprime(std::ostream&) const override;
+        void imprime(std::ostream&) const;
+};
+
+class PacienteClinico : public Paciente {
+    private:
+        int idade;
+
+    public:
+        PacienteClinico(const std::string&, int);
+
+        void imprime(std::ostream&) const;
 };
 
 std::ostream& operator<<(std::ostream&, const Paciente&);
